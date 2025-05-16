@@ -1,3 +1,28 @@
+## Install dependencies 
+
+We use [poetry](https://python-poetry.org/) as our dependency manager and build
+system framework. Please install it using:
+```shell
+$ pip install poetry
+```
+and install the dependencies by running:
+```shell
+$ poetry update
+```
+
+Install the library in editable mode so that changes in the codebase
+can be tested easily.
+
+```shell
+$ pip install -e .
+```
+
+## Run code 
+
+Use of our generator is demonstrated in the `demo.ipynb` jupyter notebook. 
+
+<!-- 
+
 ### To mention: 
 
 - [ ] What the point cloud and shape classes are for
@@ -105,4 +130,4 @@ The validity of the config is verified entirely in the `Config` class, as implem
 - [ ] Fix Bug for the image dimensions of the .parquet files 
 - [ ] The compatible vs non compatible shape constraints in the beginning of `generate_single_task` function
 - [ ] Verify that `shape_compulsory_conditionals`, `allowed_combinations` and `allowed_transformations` are within what the relevant files allow for.  
-- [ ] Write a demo file to show how to play with the shapes 
+- [ ] Write a demo file to show how to play with the shapes  -->

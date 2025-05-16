@@ -17,7 +17,7 @@ def plot_grid(grid, title = '', size = (10,10), save_path = None):
 
     fig, ax = plt.subplots(1, 1, figsize= size, dpi=300)
     ax.imshow(grid, cmap=COLORMAP, norm=NORM)
-    ax.grid(True, which='both', color='lightgrey', linewidth=0.5)
+    ax.grid(True, which='both', color='black', linewidth=0.5)
     ax.set_yticks([x - 0.5 for x in range(1 + len(grid))])
     ax.set_xticks([x - 0.5 for x in range(1 + len(grid[0]))])
     ax.set_xticklabels([])
