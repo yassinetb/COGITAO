@@ -67,7 +67,7 @@ def calculate_conditions(condition_list = None, recalculate = False):
 
 if __name__ == "__main__":
     # If you only have one condition (e.g. "is_shape_super_cool"), run:
-    calculate_conditions(['is_shape_not_fully_connected'])
+    calculate_conditions(['is_shape_cross_or_rectangle'])
     
     # If you would like to recompute the entire set of conditions, run:
     # calculate_conditions(recalculate=True)
