@@ -380,6 +380,29 @@ def is_shape_cross(shape):
                 return False
     return True
 
+def is_shape_diamond(shape):
+    """True if shape is a solid diamond (all filled cells form a diamond/rhombus pattern)."""
+    grid = shape.as_shape_only_grid
+    rows, cols = grid.shape
+    # A diamond of radius r has shape (2r+1, 2r+1) and each row i
+    # has exactly (r - |i - r|)*2 + 1 filled cells, centered
+    if rows != cols or rows % 2 == 0:
+        return False
+    r = rows // 2
+    for i in range(rows):
+        expected = 2 * (r - abs(i - r)) + 1
+        actual = np.count_nonzero(grid[i])
+        if actual != expected:
+            return False
+        # Also verify the filled cells are centered (not scattered)
+        nonzero = np.nonzero(grid[i])[0]
+        if len(nonzero) > 0 and (nonzero[-1] - nonzero[0] + 1) != expected:
+            return False
+    return True
+
+def is_shape_cross_or_rectangle_or_diamond(shape):
+    return is_shape_cross(shape) or is_shape_rectangular(shape) or is_shape_diamond(shape)
+
 def is_shape_cross_or_rectangle(shape):
     return is_shape_rectangular(shape) or is_shape_cross(shape)
 
@@ -418,6 +441,8 @@ ConditionalType = Literal[
     "is_shape_not_same_height_width",
     "is_shape_cross",
     "is_shape_cross_or_rectangle",
+    "is_shape_diamond",
+    "is_shape_cross_or_rectangle_or_diamond",
     "is_shape_same_height_width",
     "is_shape_of_two_cols",
     "is_shape_of_three_cols",
@@ -494,6 +519,8 @@ conditionals_dict: dict[ConditionalType, Callable[[Shape], bool]] = {
     "is_shape_not_same_height_width": is_shape_not_same_height_width,
     "is_shape_cross": is_shape_cross,
     "is_shape_cross_or_rectangle": is_shape_cross_or_rectangle,
+    "is_shape_diamond": is_shape_diamond,
+    "is_shape_cross_or_rectangle_or_diamond": is_shape_cross_or_rectangle_or_diamond,
     "is_shape_of_two_cols": is_shape_of_two_cols,
     "is_shape_of_three_cols": is_shape_of_three_cols,
     "is_shape_of_four_cols": is_shape_of_four_cols,
